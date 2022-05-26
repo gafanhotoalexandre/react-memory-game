@@ -1,5 +1,6 @@
-import * as C from './App.styles';
+import { InfoItem } from './components/InfoItem';
 
+import * as C from './App.styles';
 import logoImage from './assets/devmemory_logo.png';
 
 export default function App() {
@@ -11,7 +12,15 @@ export default function App() {
         </C.LogoLink>
 
         <C.InfoArea>
-          ...
+          <InfoItem
+            label="Tempo"
+            value="00:00"
+          />
+
+          <InfoItem
+            label="Movimentos"
+            value="0"
+          />
         </C.InfoArea>
 
         <button>Reiniciar</button>
