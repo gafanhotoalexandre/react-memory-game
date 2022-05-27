@@ -1,9 +1,15 @@
 import { InfoItem } from './components/InfoItem';
+import { Button } from './components/Button';
 
 import * as C from './App.styles';
 import logoImage from './assets/devmemory_logo.png';
+import restartIcon from './svgs/restart.svg';
 
 export default function App() {
+  function resetAndCreateGrid() {
+
+  }
+
   return (
     <C.Container>
       <C.Info>
@@ -23,7 +29,11 @@ export default function App() {
           />
         </C.InfoArea>
 
-        <button>Reiniciar</button>
+        <Button
+          label="Reiniciar"
+          icon={restartIcon}
+          onClick={resetAndCreateGrid}
+        />
       </C.Info>
 
       <C.GridArea>
