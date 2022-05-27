@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { InfoItem } from './components/InfoItem';
 import { Button } from './components/Button';
 import { GridItemType } from './types/GridItemType';
+import { items } from './data/items';
 
 import * as C from './App.styles';
 import logoImage from './assets/devmemory_logo.png';
@@ -18,7 +19,37 @@ export default function App() {
   useEffect(() => resetAndCreateGrid(), []);
 
   function resetAndCreateGrid() {
+    // step 1 - reset the game
+    setTimeElapsed(0);
+    setMoveCount(0);
+    setShownCount(0);
 
+    // step 2 - create grid
+    // 2.1 - create an empty grid
+    const tmpGrid: GridItemType[] = [];
+    for (let i = 0; i < (items.length * 2); i++) {
+      tmpGrid.push({
+        item: null, shown: false, permanentShown: false
+      });
+    }
+
+    // 2.2 - fill the grid
+    for (let filledItems = 0; filledItems < 2; filledItems++) {
+      for (let item = 0; item < items.length; item++) {
+        let pos = -1;
+        // while () {
+
+        // }
+      }
+    }
+
+    // 2.3 - add to state
+    setGridItems(tmpGrid);
+
+    // step 3 - start the game
+    setPlaying(true);
+
+    // setGridItems([]);
   }
 
   return (
