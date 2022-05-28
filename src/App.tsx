@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { InfoItem } from './components/InfoItem';
 import { Button } from './components/Button';
+import { GridItem } from './components/GridItem';
 import { GridItemType } from './types/GridItemType';
 import { items } from './data/items';
 
@@ -34,12 +35,14 @@ export default function App() {
     }
 
     // 2.2 - fill the grid
-    for (let filledItems = 0; filledItems < 2; filledItems++) {
+    for (let itemsToFill = 0; itemsToFill < 2; itemsToFill++) {
       for (let item = 0; item < items.length; item++) {
         let pos = -1;
-        // while () {
-
-        // }
+        // evitando que tmpGrid receba um valor repetido
+        while (pos < 0 || tmpGrid[pos].item !== null) {
+          pos = Math.floor(Math.random() * (items.length * 2));
+        }
+        tmpGrid[pos].item = item;
       }
     }
 
@@ -50,6 +53,10 @@ export default function App() {
     setPlaying(true);
 
     // setGridItems([]);
+  }
+
+  function handleItemClick(index: number) {
+
   }
 
   return (
@@ -80,7 +87,13 @@ export default function App() {
 
       <C.GridArea>
         <C.Grid>
-          ...
+          { gridItems.map((item, index) => (
+            <GridItem
+              key={index}
+              item={item}
+              onClick={() => handleItemClick(index)}
+            />
+          ))}
         </C.Grid>
       </C.GridArea>
     </C.Container>
