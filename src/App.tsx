@@ -64,7 +64,14 @@ export default function App() {
   }
 
   function handleItemClick(index: number) {
+    if (!(playing && index !== null && shownCount < 2)) return;
 
+    const tmpGrid = [...gridItems];
+    if (tmpGrid[index].permanentShown && tmpGrid[index].shown) return;
+
+    tmpGrid[index].shown = true;
+    setShownCount(shownCount + 1);
+    setGridItems(tmpGrid);
   }
 
   return (
