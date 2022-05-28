@@ -12,14 +12,22 @@ interface GridItemProps {
 export function GridItem({ item, onClick }: GridItemProps) {
   return (
     <C.Container
+      showBackground={item.permanentShown || item.shown}
       onClick={onClick}
     >
       { !item.permanentShown && !item.shown &&
-        <C.Icon src={b7Svg} alt="Ícone de carta desconhecida" />
+        <C.Icon
+          src={b7Svg}
+          alt="Ícone de carta desconhecida"
+          opacity={.1}
+        />
       }
 
       { (item.permanentShown || item.shown) && item.item !== null &&
-        <C.Icon src={items[item.item].icon} alt="Ícone de carta conhecida" />
+        <C.Icon
+          src={items[item.item].icon}
+          alt="Ícone de carta conhecida"
+        />
       }
     </C.Container>
   );
