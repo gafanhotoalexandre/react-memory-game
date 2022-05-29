@@ -27,6 +27,36 @@ export default function App() {
     return () => clearInterval(timer);
   }, [playing, timeElapsed]);
 
+  // verify if opened are equal
+  useEffect(() => {
+    if (shownCount !== 2) return;
+    const opened = gridItems.filter(item => item.shown === true);
+    if (opened.length !== 2) return;
+
+    const tmpGrid = [...gridItems];
+
+    if (opened[0].item === opened[1].item) {
+      // if both are equal, make them permanent
+      for (let i in tmpGrid) {
+        if (tmpGrid[i].shown) {
+          tmpGrid[i].permanentShown = true;
+          tmpGrid[i].shown = false;
+        }
+      }
+    } else {
+      // if they are NOT equal, close all "shown"s
+      for (let i in tmpGrid) {
+        tmpGrid[i].shown = false;
+      }
+    }
+
+    setGridItems(tmpGrid);
+    setShownCount(0);
+
+    setMoveCount(moveCount + 1);
+
+    }, [shownCount, gridItems]);
+
   function resetAndCreateGrid() {
     // step 1 - reset the game
     setTimeElapsed(0);
