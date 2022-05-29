@@ -33,29 +33,32 @@ export default function App() {
     const opened = gridItems.filter(item => item.shown === true);
     if (opened.length !== 2) return;
 
-    const tmpGrid = [...gridItems];
-
     if (opened[0].item === opened[1].item) {
       // if both are equal, make them permanent
+      const tmpGrid = [...gridItems];
       for (let i in tmpGrid) {
         if (tmpGrid[i].shown) {
           tmpGrid[i].permanentShown = true;
           tmpGrid[i].shown = false;
         }
       }
+      setGridItems(tmpGrid);
+      setShownCount(0);
     } else {
       // if they are NOT equal, close all "shown"s
-      for (let i in tmpGrid) {
-        tmpGrid[i].shown = false;
-      }
+      setTimeout(() => {
+        const tmpGrid = [...gridItems];
+        for (let i in tmpGrid) {
+          tmpGrid[i].shown = false;
+        }
+        setGridItems(tmpGrid);
+        setShownCount(0);
+      }, 800);
     }
 
-    setGridItems(tmpGrid);
-    setShownCount(0);
 
     setMoveCount(moveCount + 1);
-
-    }, [shownCount, gridItems]);
+  }, [shownCount, gridItems]);
 
   function resetAndCreateGrid() {
     // step 1 - reset the game
@@ -119,7 +122,7 @@ export default function App() {
 
           <InfoItem
             label="Movimentos"
-            value="0"
+            value={String(moveCount)}
           />
         </C.InfoArea>
 
