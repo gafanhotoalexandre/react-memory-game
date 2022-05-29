@@ -55,10 +55,14 @@ export default function App() {
         setShownCount(0);
       }, 800);
     }
-
-
     setMoveCount(moveCount + 1);
   }, [shownCount, gridItems]);
+
+    // verify if game is over
+    useEffect(() => {
+      if (!(moveCount > 0 && gridItems.every(item => item.permanentShown === true))) return;
+      setPlaying(false);
+    }, [moveCount, gridItems]);
 
   function resetAndCreateGrid() {
     // step 1 - reset the game
@@ -100,7 +104,7 @@ export default function App() {
     if (!(playing && index !== null && shownCount < 2)) return;
 
     const tmpGrid = [...gridItems];
-    if (tmpGrid[index].permanentShown && tmpGrid[index].shown) return;
+    if (tmpGrid[index].permanentShown || tmpGrid[index].shown) return;
 
     tmpGrid[index].shown = true;
     setShownCount(shownCount + 1);
