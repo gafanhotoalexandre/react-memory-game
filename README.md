@@ -14,4 +14,4 @@ Projeto desenvolvido durante o curso [B7web](https://b7web.com.br)
 - `npm run dev`
 
 ### Projeto em produção
-- [React Memory Game]()
+- [React Memory Game](https://react-memory-game-rho.vercel.app/)
